@@ -1,0 +1,49 @@
+i{
+    font-size: 50px;
+    width: 120px;
+    height: 120px;
+    background-color: whitesmoke;
+    color :black;
+}
+.item{
+    width: 120px;
+    height: 120px;
+
+}
+#infos{
+    color:white;
+}
+#body{
+    background-color: #072a40;
+}
+
+@media screen and (max-width: 992px) {
+    i{
+        font-size: 35px;
+        width: 80px;
+        height: 80px;
+    }
+    
+  }
+
+@media screen and (max-width: 768px) {
+    i{
+        font-size: 15px;
+        width: 50px;
+        height: 50px;
+        
+    }
+    .none{
+        display: none;
+    }
+
+  }
+  /*break point sm*/
+  @media screen and (max-width: 576px) {
+    i{
+        font-size: 10px;
+        width: 35px;
+        height: 35px;
+    }
+    
+  }
