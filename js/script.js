@@ -10,6 +10,7 @@ function letsPlay(){
     play.innerText="Relancer la partie";
     aireJeu.innerHTML="";
     infos.innerHTML="";
+    let player = prompt("Qui va tenter de battre un record ? ");
 
     let tableauImages =[];
     tableauImages.push("fa-500px",
@@ -81,7 +82,7 @@ function letsPlay(){
     let fin=0;
     let nbOfMove=0;
 
-    for(let i=0; i<icones.length; i++){setTimeout(function () {icones[i].style.color ="whitesmoke"},1000)};
+    //for(let i=0; i<icones.length; i++){setTimeout(function () {icones[i].style.color ="whitesmoke"},1000)};
 
     for(let i=0; i<icones.length; i++){
         icones[i].addEventListener("mouseleave",borderHide);
@@ -89,62 +90,74 @@ function letsPlay(){
         icones[i].addEventListener("click",select);
     }
 
-function select(){
-    if(card1==null){
-        card1 = this;
-        this.style.color ="black";
-    }
-    else if(card2==null && card1.id !=this.id){
-        card2=this;
-        this.style.color ="black";
-    }
-    if(card1 !=null && card2 !=null){
-        if(card1.classList.value == card2.classList.value){
-            card2.style.color="green";
-            card2.removeEventListener("click",select);
-            card1.removeEventListener("click",select);
-            card2.removeEventListener("mouseleave",borderHide);
-            card2.removeEventListener("mouseenter",borderShow);
-            card1.removeEventListener("mouseleave",borderHide);
-            card1.removeEventListener("mouseenter",borderShow);
-            card1.style.color="green";
-            card1.style.border ="2px solid black";
-            card2.style.border ="2px solid black";
-            card1=null;
-            card2=null;
-            fin++;
-            nbOfMove++;
+    function select(){
+        if(card1==null){
+            card1 = this;
+            this.style.color ="black";
+        }
+        else if(card2==null && card1.id !=this.id){
+            card2=this;
+            this.style.color ="black";
+        }
+        if(card1 !=null && card2 !=null){
+            if(card1.classList.value == card2.classList.value){
+                card2.style.color="green";
+                card2.removeEventListener("click",select);
+                card1.removeEventListener("click",select);
+                card2.removeEventListener("mouseleave",borderHide);
+                card2.removeEventListener("mouseenter",borderShow);
+                card1.removeEventListener("mouseleave",borderHide);
+                card1.removeEventListener("mouseenter",borderShow);
+                card1.style.color="green";
+                card1.style.border ="2px solid black";
+                card2.style.border ="2px solid black";
+                card1=null;
+                card2=null;
+                fin++;
+                nbOfMove++;
+            }
+            else{
+                nbOfMove++;
+                setTimeout(function () {
+                    card1.style.color="whitesmoke";
+                    card1=null;
+                },1000);
+                setTimeout(function () {
+                    card2.style.color="whitesmoke";
+                    card2=null;
+                },1000);
+            }
+        }
+
+        if(fin==tableauImages.length){
+            infos.innerHTML="Félicitations ! Vous avez réussi en "+ nbOfMove+" essais";
+
+            $.ajax({
+                type: "POST",
+                url: 'https://julienbailly.ddns.net/memory/php/db.php',
+                data: {player, nbOfMove},
+                sucess: function(response){
+                    console.log(response);
+                },
+                error: function(response){
+                    console.log(response);
+                },
+            });
+
         }
         else{
-            nbOfMove++;
-            setTimeout(function () {
-                card1.style.color="whitesmoke";
-                card1=null;
-            },1000);
-            setTimeout(function () {
-                card2.style.color="whitesmoke";
-                card2=null;
-            },1000);
-        }
+            infos.innerHTML=nbOfMove+" essais réalisés";  
+        }       
+        
     }
 
-    if(fin==tableauImages.length){
-        infos.innerHTML="Félicitations ! Vous avez réussi en "+ nbOfMove+" essais";
+    function borderHide(){
+        this.style.border ="";
     }
-    else{
-        infos.innerHTML=nbOfMove+" essais réalisés";  
+
+    function borderShow(){
+        this.style.border ="4px solid yellow";
     }
-    
-    
-}
-
-function borderHide(){
-    this.style.border ="";
-}
-
-function borderShow(){
-    this.style.border ="4px solid yellow";
-}
 
 }
 
