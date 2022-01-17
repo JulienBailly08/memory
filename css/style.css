@@ -16,6 +16,10 @@ i{
 #body{
     background-color: #072a40;
 }
+li
+{
+  list-style-type: none;
+}
 
 @media screen and (max-width: 992px) {
     i{

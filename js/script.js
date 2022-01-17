@@ -14,11 +14,11 @@ function letsPlay(){
     let tableauImages =[];
     tableauImages.push("fa-500px",
     "fa-acquisitions-incorporated",
-    /*"fa-accusoft",*/
+    "fa-accusoft",
     "fa-android",
     "fa-airbnb",
     "fa-affiliatetheme",
-    "fa-amazon",
+    /*"fa-amazon",*/
     "fa-angular",
     "fa-angellist",
     "fa-atlassian",
@@ -129,7 +129,7 @@ function select(){
     }
 
     if(fin==tableauImages.length){
-        infos.innerHTML="Félicitations ! Vous avez réussi en réalisant "+ nbOfMove+" essais";
+        infos.innerHTML="Félicitations ! Vous avez réussi en "+ nbOfMove+" essais";
     }
     else{
         infos.innerHTML=nbOfMove+" essais réalisés";  
