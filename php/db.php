@@ -44,7 +44,19 @@ endif;
  
             echo('Erreur : '.$e->getMessage());
         
-    }
+    }?>
+
+    <h3 class="text-white">Maitre incontesté : <?php echo($highScores[0]->name)?> en <?php echo($highScores[0]->nbOfMove)?> mouvements</h3>
+                <p class="text-white"> Autres Champions :</p>
+                <ul>
+                <?php
+                    for($i=1;$i<=4;$i++):
+                    ?>
+                    <li class="text-white"><?php echo($highScores[$i]->name)?> en <?php echo($highScores[$i]->nbOfMove)?> mouvements</li>
+                    <?php
+                    endfor;
+                ?>
+                </ul>
 
 
 

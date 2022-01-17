@@ -1,6 +1,8 @@
 const play = document.getElementById("play");
+const score = document.getElementById("score");
 play.addEventListener("click",letsPlay);
 
+updateScore();
 
 function letsPlay(){
 
@@ -82,7 +84,7 @@ function letsPlay(){
     let fin=0;
     let nbOfMove=0;
 
-    //for(let i=0; i<icones.length; i++){setTimeout(function () {icones[i].style.color ="whitesmoke"},1000)};
+    for(let i=0; i<icones.length; i++){setTimeout(function () {icones[i].style.color ="whitesmoke"},1000)};
 
     for(let i=0; i<icones.length; i++){
         icones[i].addEventListener("mouseleave",borderHide);
@@ -143,6 +145,8 @@ function letsPlay(){
                     console.log(response);
                 },
             });
+            score.innerHTML="";
+            updateScore();
 
         }
         else{
@@ -159,6 +163,22 @@ function letsPlay(){
         this.style.border ="4px solid yellow";
     }
 
+}
+
+function updateScore(){
+    $.ajax({ 
+        url: 'https://julienbailly.ddns.net/memory/php/db.php',
+        sucess: function(response){
+            console.log(response);
+        },
+        error: function(response){
+            console.log(response);
+        },
+    }).done(
+        function(response){
+            score.innerHTML= response;
+        }
+    );
 }
 
 
