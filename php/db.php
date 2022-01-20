@@ -2,11 +2,11 @@
 include_once 'config.php';
 
 if (isset($_POST['player'])):
-    $player=$_POST['player'];
+    $player=htmlspecialchars($_POST['player']);
 endif;
 
 if (isset($_POST['nbOfMove'])):
-    $nbOfMove=$_POST['nbOfMove'];
+    $nbOfMove=htmlspecialchars($_POST['nbOfMove']);
 endif;
 
 
